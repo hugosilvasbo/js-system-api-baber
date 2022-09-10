@@ -5,7 +5,7 @@ router.post('/', async (req, res) => {
     const { name, user, password_reseted, password } = req.body
 
     if (!name) {
-        res.status(422).json({ error: 'O nome é obrigatório!!' })
+        res.status(422).json({ error: 'O nome é obrigatório!' })
         return
     }
 
