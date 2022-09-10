@@ -2,14 +2,29 @@
       Essa rota será usada tanto pelo usuário, qunado pelo administrador.
       O usuário apenas poderá trocar o nome e sua senha. Nome de usuário NÃO.
 
-[  ] Criar rotina de itens/serviços, contendo:
-     description
-     price
-     state (ativo ou inativo)
-     restricted (se será visível pelo cliente ou nao)
+[ x ] Criar rotina de itens/serviços
 
 [  ] Criar rotina de agendamento.
 - client. (id do cliente)
 - employee (id do barbeiro)
 - datetime (quando será feito o corte)
 - services (uma listagem do que será feito conforme o cadastro, cabelo, barba, pezinho etc com base no cadastro e funcionário)
+
+---- ideia:
+1. O cliente vai no barbeiro
+2. O barbeiro faz um breve cadastro do cliente, fornecendo um login e senha
+3. O cliente ao entrar no aplicativo ou site, altera sua senha a primeira vez e loga se, seu cadastro estiver ativo
+4. Com isso, ele pode fazer os agendamentos, sendo:
+   - Seleciona o barbeiro
+   - Seleciona os serviços, tais como: Cabelo e barba, ou Cabelo e selagem, platinagem etc
+   - Com isso, seleciona o dia e horário, sendo:
+     - O barbeiro definirá sua rotina de trabalho, com os horários de todos os dias
+     - Será listado apenas os horários disponíveis ao usuário
+     - Ao gravar, faz uma segunda tratativa, para não correr o perigo de outro usuário já ter pego antes dele
+
+5. Horários...
+   - No caso do horário, procurar algum componente que trate isso, e se ele trata de quantos minuto e minutos
+   - Ficará disponivel, para o barbeiro saber controlar seu horário, de entrada, saída, almoço ou ausencia
+
+
+
