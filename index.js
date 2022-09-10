@@ -2,9 +2,13 @@
 require('dotenv').config()
 const express = require('express')
 const { default: mongoose } = require('mongoose')
+var cors = require('cors')
 const app = express()
 
+
 // forma de ler JSON / Middlewares
+app.use(cors())
+
 app.use(
     express.urlencoded({
         extended: true
