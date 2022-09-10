@@ -1,25 +1,46 @@
 const router = require('express').Router()
 const Person = require('../models/Person')
 
-router.post('/', async (req, res) => {
-    const { name, user, password_reseted, password } = req.body
+function validadeFields(person) {
+    console.log(person)
 
-    if (!name) {
-        res.status(422).json({ error: 'O nome é obrigatório!' })
-        return
+    if (!person.name) {
+        return "Campo nome é obrigatório!"
     }
 
+    if (!person.user) {
+        return "É preciso definir um nome de usuário!"
+    }
+
+    if (!person.password) {
+        return "Insira uma senha para o usuário!"
+    }
+}
+
+router.post('/', async (req, res) => {
+    const { name, email, telephone, cellphone, user, password, password_reseted, is_client, is_employee } = req.body
 
     const person = {
         name,
+        email,
+        telephone,
+        cellphone,
         user,
+        password,
         password_reseted,
-        password
+        is_client,
+        is_employee
+    }
+
+    const validate = validadeFields(person);
+
+    if (validate) {
+        res.status(422).json({ error: validate })
+        return
     }
 
     try {
         await Person.create(person)
-
         res.status(201).json({ message: "Pessoa cadastrada com sucesso!" })
     } catch (error) {
         res.status(500).json({ error: error })
@@ -58,13 +79,25 @@ router.get('/:id', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     const id = req.params.id
 
-    const { name, user, password_reseted, password } = req.body
+    const { name, email, telephone, cellphone, user, password, password_reseted, is_client, is_employee } = req.body
 
     const person = {
         name,
+        email,
+        telephone,
+        cellphone,
         user,
+        password,
         password_reseted,
-        password
+        is_client,
+        is_employee
+    }
+
+    const validate = validadeFields(person)
+
+    if (validate) {
+        res.status(422).json({ error: validate })
+        return
     }
 
     try {
@@ -87,13 +120,13 @@ router.delete('/:id', async (req, res) => {
     const person = await Person.findOne({ _id: id })
 
     if (!person) {
-        res.status(422).json({ message: 'O usuário nao foi encontrado!' })
+        res.status(422).json({ message: 'Não foi encontrado o cadastro!' })
         return
     }
 
     try {
         await Person.deleteOne({ _id: id })
-        res.status(200).json({ message: "Pessoa removida com sucesso!" })
+        res.status(200).json({ message: "Registro excluído com sucesso!" })
     } catch (error) {
         res.status(500).json({ error: error })
     }

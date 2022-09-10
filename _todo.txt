@@ -1,0 +1,15 @@
+[ x ] Criar rotina do cadastro de pessoa simples, com o nome, email, password, password_reseted, is_client, is_employee, celphone and telephone
+      Essa rota será usada tanto pelo usuário, qunado pelo administrador.
+      O usuário apenas poderá trocar o nome e sua senha. Nome de usuário NÃO.
+
+[  ] Criar rotina de itens/serviços, contendo:
+     description
+     price
+     state (ativo ou inativo)
+     restricted (se será visível pelo cliente ou nao)
+
+[  ] Criar rotina de agendamento.
+- client. (id do cliente)
+- employee (id do barbeiro)
+- datetime (quando será feito o corte)
+- services (uma listagem do que será feito conforme o cadastro, cabelo, barba, pezinho etc com base no cadastro e funcionário)
