@@ -22,6 +22,8 @@ router.post('/', async (req, res) => {
         type
     }
 
+    console.log({ productPost: product })
+
     const validate = validateFields(product)
 
     if (validate) {
@@ -75,6 +77,8 @@ router.patch('/:id', async (req, res) => {
         restricted,
         type
     }
+
+    console.log({ productPatch: product })
 
     const validate = validateFields(product)
 

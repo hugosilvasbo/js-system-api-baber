@@ -2,8 +2,6 @@ const router = require('express').Router()
 const Person = require('../models/Person')
 
 function validadeFields(person) {
-    console.log(person)
-
     if (!person.name) {
         return "Campo nome é obrigatório!"
     }
@@ -78,7 +76,6 @@ router.get('/:id', async (req, res) => {
 // Update - atualizacao dos dados (PUT , PATCH)
 router.patch('/:id', async (req, res) => {
     const id = req.params.id
-
     const { name, email, telephone, cellphone, user, password, password_reseted, is_client, is_employee } = req.body
 
     const person = {
@@ -108,7 +105,7 @@ router.patch('/:id', async (req, res) => {
             return
         }
 
-        res.status(200).json(person)
+        res.status(200).json({ message: 'Alteração realizada!' })
     } catch (error) {
         res.status(500).json({ error: error })
     }
@@ -126,7 +123,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         await Person.deleteOne({ _id: id })
-        res.status(200).json({ message: "Registro excluído com sucesso!" })
+        res.status(200).json({ message: "Pessoa excluída com sucesso!" });
     } catch (error) {
         res.status(500).json({ error: error })
     }
