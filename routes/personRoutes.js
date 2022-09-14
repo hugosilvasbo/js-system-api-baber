@@ -2,17 +2,21 @@ const router = require('express').Router()
 const Person = require('../models/Person')
 
 function validadeFields(person) {
-    if (!person.name) {
-        return "Campo nome é obrigatório!"
+    const result = {};
+
+    if (person.name === '') {
+        result = { ...result, name: "Campo nome é obrigatório!" }
     }
 
-    if (!person.user) {
-        return "É preciso definir um nome de usuário!"
+    if (person.user === '') {
+        result = { ...result, user: "É preciso definir um nome de usuário!" }
     }
 
-    if (!person.password) {
-        return "Insira uma senha para o usuário!"
+    if (person.password === '') {
+        result = { ...result, password: "Insira uma senha para o usuário!" }
     }
+
+    return result;
 }
 
 router.post('/', async (req, res) => {
@@ -31,6 +35,7 @@ router.post('/', async (req, res) => {
     }
 
     const validate = validadeFields(person);
+    console.log({ validadePostAPI: validate })
 
     if (validate) {
         res.status(422).json({ error: validate })
