@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
         const employee = await Employee.findOne({ _id: id })
 
         if (!employee) {
-            res.status(422).json({ message: 'funcionário(a) nao foi encontrado(a)!' })
+            res.status(422).json({ message: 'Funcionário(a) nao foi encontrado(a)!' })
             return
         }
 
