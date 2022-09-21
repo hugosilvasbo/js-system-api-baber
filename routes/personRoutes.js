@@ -3,7 +3,7 @@ const Person = require('../models/Person')
 
 router.post('/', async (req, res) => {
     console.log({ APIPost: req.body })
-    const { name, email, telephone, cellphone, user, password, password_reseted, is_client, is_employee } = req.body
+    const { name, email, telephone, cellphone, user, password, password_reseted } = req.body
 
     const person = {
         name,
@@ -12,9 +12,7 @@ router.post('/', async (req, res) => {
         cellphone,
         user,
         password,
-        password_reseted,
-        is_client,
-        is_employee
+        password_reseted
     }
 
     try {
@@ -56,7 +54,7 @@ router.get('/:id', async (req, res) => {
 // Update - atualizacao dos dados (PUT , PATCH)
 router.patch('/:id', async (req, res) => {
     const id = req.params.id
-    const { name, email, telephone, cellphone, user, password, password_reseted, is_client, is_employee } = req.body
+    const { name, email, telephone, cellphone, user, password, password_reseted } = req.body
 
     const person = {
         name,
@@ -65,10 +63,10 @@ router.patch('/:id', async (req, res) => {
         cellphone,
         user,
         password,
-        password_reseted,
-        is_client,
-        is_employee
+        password_reseted
     }
+
+    console.log(password_reseted)
 
     try {
         const updatedPerson = await Person.updateOne({ _id: id }, person)

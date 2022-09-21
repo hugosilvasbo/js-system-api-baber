@@ -7,9 +7,7 @@ const Person = mongoose.model('Person', {
     cellphone: String,
     user: String,
     password: String,
-    password_reseted: Boolean,
-    is_client: Boolean,
-    is_employee: Boolean
+    password_reseted: Boolean
 })
 
 module.exports = Person
