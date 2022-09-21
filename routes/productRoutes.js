@@ -22,8 +22,6 @@ router.post('/', async (req, res) => {
         type
     }
 
-    console.log({ productPost: product })
-
     const validate = validateFields(product)
 
     if (validate) {

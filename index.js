@@ -5,7 +5,6 @@ const { default: mongoose } = require('mongoose')
 var cors = require('cors')
 const app = express()
 
-
 // forma de ler JSON / Middlewares
 app.use(cors())
 
@@ -20,9 +19,11 @@ app.use(express.json())
 // rotas da API
 const personRoutes = require('./routes/personRoutes')
 const productRoutes = require('./routes/productRoutes')
+const employeeRoutes = require('./routes/employeeRoutes')
 
 app.use('/person', personRoutes)
 app.use('/product', productRoutes)
+app.use('/employee', employeeRoutes)
 
 // rota inicial / endpoint
 app.get('/', (req, res) => {
