@@ -2,7 +2,6 @@ const router = require('express').Router()
 const Person = require('../models/Person')
 
 router.post('/', async (req, res) => {
-    console.log({ APIPost: req.body })
     const { name, email, telephone, cellphone, user, password, password_reseted } = req.body
 
     const person = {
@@ -65,8 +64,6 @@ router.patch('/:id', async (req, res) => {
         password,
         password_reseted
     }
-
-    console.log(password_reseted)
 
     try {
         const updatedPerson = await Person.updateOne({ _id: id }, person)
