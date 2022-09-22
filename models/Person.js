@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const Person = mongoose.model('Person', {
+var personSchema = new Schema({
     name: String,
     email: String,
     telephone: String,
@@ -10,4 +11,4 @@ const Person = mongoose.model('Person', {
     password_reseted: Boolean
 })
 
-module.exports = Person
+module.exports = mongoose.model('Person', personSchema)

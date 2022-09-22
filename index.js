@@ -20,10 +20,12 @@ app.use(express.json())
 const personRoutes = require('./routes/personRoutes')
 const productRoutes = require('./routes/productRoutes')
 const employeeRoutes = require('./routes/employeeRoutes')
+const scheduleRoutes = require('./routes/scheduleRoutes')
 
 app.use('/person', personRoutes)
 app.use('/product', productRoutes)
 app.use('/employee', employeeRoutes)
+app.use('/schedule', scheduleRoutes)
 
 // rota inicial / endpoint
 app.get('/', (req, res) => {

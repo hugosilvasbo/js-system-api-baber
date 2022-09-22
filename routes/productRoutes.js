@@ -1,16 +1,6 @@
 const router = require('express').Router()
 const Product = require('../models/Product')
 
-function validateFields(product) {
-    if (!product.description) {
-        return 'Informe a descrição do item!'
-    }
-
-    if (product.price < 0) {
-        return 'Preço deve ser um real maior que R$0,00!'
-    }
-}
-
 router.post('/', async (req, res) => {
     const { description, price, active, restricted, type } = req.body
 
@@ -20,13 +10,6 @@ router.post('/', async (req, res) => {
         active,
         restricted,
         type
-    }
-
-    const validate = validateFields(product)
-
-    if (validate) {
-        res.status(422).json({ error: validate })
-        return
     }
 
     try {
@@ -74,15 +57,6 @@ router.patch('/:id', async (req, res) => {
         active,
         restricted,
         type
-    }
-
-    console.log({ productPatch: product })
-
-    const validate = validateFields(product)
-
-    if (validate) {
-        res.status(422).json({ error: validate })
-        return
     }
 
     try {
