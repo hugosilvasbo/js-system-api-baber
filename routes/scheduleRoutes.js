@@ -20,8 +20,11 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
+        let { date } = req.params
+        console.log(req.params)
+
         const schedule = await Schedule
-            .find()
+            .find(query)
             .populate('person')
 
         res.status(200).json(schedule)
