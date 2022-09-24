@@ -29,12 +29,13 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    console.log('Cai no get!')
     try {
         let {
             startdate,
             enddate
         } = req.query
+
+        console.log({ reqQuery: startdate })
 
         let query = {
             startdate,
@@ -42,6 +43,7 @@ router.get('/', async (req, res) => {
         }
 
         Object.keys(query).map((i) => i == undefined && delete query[i])
+        console.log({ getSchedule: query })
 
         const schedule = await Schedule
             .find({
@@ -52,6 +54,7 @@ router.get('/', async (req, res) => {
             })
             .populate('person')
 
+        console.log({ api: schedule })
         res.status(200).json(schedule)
     } catch (error) {
         res.status(500).json({
