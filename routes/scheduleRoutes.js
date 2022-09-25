@@ -35,16 +35,13 @@ router.get('/', async (req, res) => {
             enddate
         } = req.query
 
-        console.log({ reqQuery: startdate })
-
         let query = {
             startdate,
             enddate
         }
 
         Object.keys(query).map((i) => i == undefined && delete query[i])
-        console.log({ getSchedule: query })
-
+        
         const schedule = await Schedule
             .find({
                 date: {
@@ -54,7 +51,6 @@ router.get('/', async (req, res) => {
             })
             .populate('person')
 
-        console.log({ api: schedule })
         res.status(200).json(schedule)
     } catch (error) {
         res.status(500).json({
