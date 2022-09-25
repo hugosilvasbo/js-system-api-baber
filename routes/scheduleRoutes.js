@@ -1,5 +1,5 @@
 /**
- * @author Hugo Souza <hugosilva.souza@hotmail.com>
+ * @author Hugo S. Souza <hugosilva.souza@hotmail.com>
  */
 
 const router = require('express').Router()
@@ -30,25 +30,21 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
+        let query;
         let {
             startdate,
             enddate
         } = req.query
 
-        let query = {
-            startdate,
-            enddate
-        }
+        startdate && enddate && (query = {
+            date: {
+                $gte: startdate,
+                $lte: enddate
+            }
+        })
 
-        Object.keys(query).map((i) => i == undefined && delete query[i])
-        
         const schedule = await Schedule
-            .find({
-                date: {
-                    $gte: query.startdate,
-                    $lte: query.enddate
-                }
-            })
+            .find(query)
             .populate('person')
 
         res.status(200).json(schedule)
