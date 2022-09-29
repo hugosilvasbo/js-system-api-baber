@@ -5,6 +5,9 @@ const { default: mongoose } = require('mongoose')
 var cors = require('cors')
 const app = express()
 
+// configuração de timezone brasileira! :)
+process.env.TZ = "America/Brasilia";
+
 // forma de ler JSON / Middlewares
 app.use(cors())
 

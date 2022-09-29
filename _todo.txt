@@ -1,2 +1,5 @@
 --> Relacionamentos mongo db
 https://medium.com/@brandon.lau86/one-to-many-relationships-with-mongodb-and-mongoose-in-node-express-d5c9d23d93c2
+
+--> Time zone
+https://www.kindacode.com/article/2-ways-to-set-default-time-zone-in-node-js/
