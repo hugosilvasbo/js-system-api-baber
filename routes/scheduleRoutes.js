@@ -84,4 +84,38 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.patch('/:id', async (req, res) => {
+    const id = req.params.id
+
+    const {
+        date
+    } = req.body
+
+
+    const schedule = {
+        date
+    }
+
+    try {
+        const updated = await Schedule.updateOne({
+            _id: id
+        }, schedule)
+
+        if (updated.matchedCount === 0) {
+            res.status(422).json({
+                message: 'Agendamento não encontrado!'
+            })
+            return
+        }
+
+        res.status(200).json({
+            message: 'Alteração realizada!'
+        })
+    } catch (error) {
+        res.status(500).json({
+            error: error
+        })
+    }
+})
+
 module.exports = router
