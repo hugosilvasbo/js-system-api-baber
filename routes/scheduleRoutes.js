@@ -33,14 +33,14 @@ router.get('/', async (req, res) => {
     try {
         let query;
         let {
-            startdate,
-            enddate
+            dia_inicial,
+            dia_final
         } = req.query
 
-        startdate && enddate && (query = {
+        dia_inicial && dia_final && (query = {
             date: {
-                $gte: startdate,
-                $lte: enddate
+                $gte: dia_inicial,
+                $lte: dia_final
             }
         })
 
