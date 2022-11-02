@@ -59,6 +59,8 @@ router.get('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const id = req.params.id
 
+    console.log({ excluirAgendamento: id })
+
     const schedule = await Schedule.findOne({
         _id: id
     })
