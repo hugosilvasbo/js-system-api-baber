@@ -88,13 +88,19 @@ router.patch('/:id', async (req, res) => {
     const id = req.params.id
 
     const {
-        date
+        date,
+        person
     } = req.body
 
 
     const schedule = {
-        date
+        date,
+        person
     }
+
+    console.log({
+        schedule_patch: schedule
+    })
 
     try {
         const updated = await Schedule.updateOne({
