@@ -2,15 +2,17 @@ const router = require('express').Router()
 const Product = require('../models/Product')
 
 router.post('/', async (req, res) => {
-    const { description, price, active, restricted, type } = req.body
+    const { description, price, active, restrict, type } = req.body
 
     const product = {
         description,
         price,
         active,
-        restricted,
+        restrict,
         type
     }
+
+    console.log({ post_product: product })
 
     try {
         await Product.create(product)
@@ -49,13 +51,13 @@ router.get('/:id', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     const id = req.params.id
 
-    const { description, price, active, restricted, type } = req.body
+    const { description, price, active, restrict, type } = req.body
 
     const product = {
         description,
         price,
         active,
-        restricted,
+        restrict,
         type
     }
 

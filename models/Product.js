@@ -4,7 +4,7 @@ const Product = mongoose.model('Product', {
     description: String,
     price: Number,
     active: Boolean,
-    restricted: Boolean,
+    restrict: Boolean,
     type: String // type: product ... service
 })
 
