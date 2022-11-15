@@ -8,12 +8,14 @@ const Schedule = require('../models/Schedule')
 router.post('/', async (req, res) => {
     const {
         person,
-        date
+        date,
+        date_end
     } = req.body
 
     const schedule = {
         person,
-        date
+        date,
+        date_end
     }
 
     try {
@@ -61,7 +63,7 @@ router.delete('/:id', async (req, res) => {
 
     const schedule = await Schedule.findOne({
         _id: id
-    })
+    });
 
     if (!schedule) {
         res.status(422).json({
@@ -73,7 +75,11 @@ router.delete('/:id', async (req, res) => {
     try {
         await Schedule.deleteOne({
             _id: id
-        })
+        });
+
+        //Para excluir tudo para teste...
+        //await Schedule.deleteMany();
+
         res.status(200).json({
             message: "Agendamento removido!"
         });
@@ -89,12 +95,14 @@ router.patch('/:id', async (req, res) => {
 
     const {
         date,
+        date_end,
         person
     } = req.body
 
 
     const schedule = {
         date,
+        date_end,
         person
     }
 
