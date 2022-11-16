@@ -8,12 +8,14 @@ const Schedule = require('../models/Schedule')
 router.post('/', async (req, res) => {
     const {
         person,
+        situation,
         date,
         date_end
     } = req.body
 
     const schedule = {
         person,
+        situation,
         date,
         date_end
     }
@@ -25,7 +27,6 @@ router.post('/', async (req, res) => {
         })
     } catch (error) {
         res.status(500).json({
-
             error: error
         })
     }
@@ -35,23 +36,30 @@ router.get('/', async (req, res) => {
     try {
         let query;
         let {
-            dia_inicial,
-            dia_final
+            date,
+            date_end
         } = req.query
 
-        dia_inicial && dia_final && (query = {
+        console.log("Get...")
+
+        date && date_end && (query = {
             date: {
-                $gte: dia_inicial,
-                $lte: dia_final
+                $gte: date,
+                $lte: date_end
             }
-        })
+        });
 
         const schedule = await Schedule
             .find(query)
             .populate('person')
+            .populate('situation')
+            .sort({ 'date_end': 'asc' });
+
+        console.log({ schedule })
 
         res.status(200).json(schedule)
     } catch (error) {
+        console.log({ error })
         res.status(500).json({
             error: error
         })
@@ -78,7 +86,7 @@ router.delete('/:id', async (req, res) => {
         });
 
         //Para excluir tudo para teste...
-        //await Schedule.deleteMany();
+        await Schedule.deleteMany();
 
         res.status(200).json({
             message: "Agendamento removido!"
@@ -96,14 +104,16 @@ router.patch('/:id', async (req, res) => {
     const {
         date,
         date_end,
-        person
+        person,
+        situation
     } = req.body
 
 
     const schedule = {
         date,
         date_end,
-        person
+        person,
+        situation
     }
 
     console.log({

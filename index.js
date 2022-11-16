@@ -24,16 +24,18 @@ const personRoutes = require('./routes/personRoutes')
 const productRoutes = require('./routes/productRoutes')
 const employeeRoutes = require('./routes/employeeRoutes')
 const scheduleRoutes = require('./routes/scheduleRoutes')
+const scheduleSituation = require('./routes/scheduleSituationRoutes')
 
 app.use('/person', personRoutes)
 app.use('/product', productRoutes)
 app.use('/employee', employeeRoutes)
 app.use('/schedule', scheduleRoutes)
+app.use('/scheduleSituation', scheduleSituation)
 
 // rota inicial / endpoint
 app.get('/', (req, res) => {
     res.json({ message: 'Oi express!' })
-})
+});
 
 // entregar uma porta
 const DB_USER = process.env.DB_USER
