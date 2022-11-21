@@ -24,6 +24,32 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.patch('/:id', async (req, res) => {
+    const id = req.params.id
+    const {
+        description,
+        color
+    } = req.body;
+
+    const situation = {
+        description,
+        color
+    };
+
+    try {
+        const updated = await ScheduleSituation.updateOne({ _id: id }, situation)
+
+        if (updated.matchedCount === 0) {
+            res.status(422).json({ message: 'Situação não encontrada!' })
+            return
+        }
+
+        res.status(200).json({ message: 'Alteração realizada!' })
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
+});
+
 router.get('/', async (req, res) => {
     try {
         const situations = await ScheduleSituation.find();

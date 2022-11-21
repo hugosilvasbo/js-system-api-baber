@@ -86,7 +86,7 @@ router.delete('/:id', async (req, res) => {
         });
 
         //Para excluir tudo para teste...
-        await Schedule.deleteMany();
+        //await Schedule.deleteMany();
 
         res.status(200).json({
             message: "Agendamento removido!"
