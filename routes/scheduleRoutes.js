@@ -10,14 +10,16 @@ router.post('/', async (req, res) => {
         person,
         situation,
         date,
-        date_end
+        date_end,
+        employee
     } = req.body
 
     const schedule = {
         person,
         situation,
         date,
-        date_end
+        date_end,
+        employee
     }
 
     try {
@@ -53,6 +55,7 @@ router.get('/', async (req, res) => {
             .find(query)
             .populate('person')
             .populate('situation')
+            .populate('employee')
             .sort({ 'date_end': 'asc' });
 
         console.log({ schedule })
@@ -105,7 +108,8 @@ router.patch('/:id', async (req, res) => {
         date,
         date_end,
         person,
-        situation
+        situation,
+        employee
     } = req.body
 
 
@@ -113,7 +117,8 @@ router.patch('/:id', async (req, res) => {
         date,
         date_end,
         person,
-        situation
+        situation,
+        employee
     }
 
     console.log({
