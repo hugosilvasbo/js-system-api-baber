@@ -8,7 +8,7 @@ const Schedule = require('../models/Schedule')
 router.post('/', async (req, res) => {
     const {
         person,
-        situation,
+        scheduleSituation,
         date,
         date_end,
         employee
@@ -16,11 +16,13 @@ router.post('/', async (req, res) => {
 
     const schedule = {
         person,
-        situation,
+        scheduleSituation,
         date,
         date_end,
         employee
     }
+
+    console.log(schedule);
 
     try {
         await Schedule.create(schedule)
@@ -42,8 +44,6 @@ router.get('/', async (req, res) => {
             date_end
         } = req.query
 
-        console.log("Get...")
-
         date && date_end && (query = {
             date: {
                 $gte: date,
@@ -54,15 +54,12 @@ router.get('/', async (req, res) => {
         const schedule = await Schedule
             .find(query)
             .populate('person')
-            .populate('situation')
+            .populate('scheduleSituation')
             .populate('employee')
             .sort({ 'date_end': 'asc' });
 
-        console.log({ schedule })
-
         res.status(200).json(schedule)
     } catch (error) {
-        console.log({ error })
         res.status(500).json({
             error: error
         })
@@ -108,7 +105,7 @@ router.patch('/:id', async (req, res) => {
         date,
         date_end,
         person,
-        situation,
+        scheduleSituation,
         employee
     } = req.body
 
@@ -117,33 +114,26 @@ router.patch('/:id', async (req, res) => {
         date,
         date_end,
         person,
-        situation,
+        scheduleSituation,
         employee
     }
 
-    console.log({
-        schedule_patch: schedule
-    })
+    console.log(id)
 
     try {
-        const updated = await Schedule.updateOne({
-            _id: id
-        }, schedule)
+        const updated = await Schedule.updateOne({ _id: id }, schedule);
 
         if (updated.matchedCount === 0) {
             res.status(422).json({
                 message: 'Agendamento não encontrado!'
-            })
-            return
+            });
+            return;
         }
 
-        res.status(200).json({
-            message: 'Alteração realizada!'
-        })
+        res.status(200).json({ message: 'Alteração realizada!' });
     } catch (error) {
-        res.status(500).json({
-            error: error
-        })
+        console.log(error);
+        res.status(500).json({ error: error });
     }
 })
 
